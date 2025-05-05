@@ -9,6 +9,7 @@ JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
 JWT_ALGORITHM = os.getenv('JWT_ALGORITHM')
 MONGO_URL = os.getenv('MONGO_URL')
 ORIGIN = os.getenv('ORIGIN')
+PORT = 8000
 
 cloudinary.config(
     cloud_name=os.getenv("CLOUDINARY_NAME"),
