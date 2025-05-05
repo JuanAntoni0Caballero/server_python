@@ -6,7 +6,6 @@ from starlette.middleware.cors import CORSMiddleware
 from core.config import ORIGIN, PORT
 
 app = FastAPI()
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[ORIGIN],
@@ -22,8 +21,6 @@ async def read_root():
 app.include_router(games.router, prefix="/games", tags=["Games"])
 app.include_router(auth.router, prefix='/auth', tags=['Auth'])
 app.include_router(uploadImage.router, prefix="/upload", tags=["Upload"])
-
-print(".el puerto ==>", PORT)
 
 if __name__ == "__main__":
     port = int(PORT)
