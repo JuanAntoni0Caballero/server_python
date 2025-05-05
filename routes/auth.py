@@ -38,7 +38,6 @@ async def login(user: UserLogin):
     # Crear el JWT token
     access_token_expires = timedelta(hours=6)  # Expira en 6 horas
     access_token = create_access_token(data={"sub": user.email, "username": db_user["username"]}, expires_delta=access_token_expires)
-    print('access_token ==>', access_token)
     return {"authToken": access_token, "token_type": "bearer"}
 
 
