@@ -34,10 +34,19 @@ async def login(user: UserLogin):
     db_user = await users_collection.find_one({"email": user.email})
     if not db_user or not pwd_context.verify(user.password, db_user["password"]):
         raise HTTPException(status_code=401, detail="Credenciales incorrectas")
+    print('el user ==>', db_user)
+
+    likes = [{"game": str(like["game"]), "_id": str(like["_id"])} for like in db_user.get("likes", [])]
 
     # Crear el JWT token
     access_token_expires = timedelta(hours=6)  # Expira en 6 horas
-    access_token = create_access_token(data={"sub": user.email, "username": db_user["username"]}, expires_delta=access_token_expires)
+    access_token = create_access_token(data={
+        "sub": user.email, 
+        "username": db_user["username"], 
+        "role" : db_user['role'],
+        "likes": likes
+        }, expires_delta=access_token_expires)
+    
     return {"authToken": access_token, "token_type": "bearer"}
 
 
