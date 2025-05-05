@@ -1,6 +1,6 @@
 from typing import Union
 from fastapi import FastAPI
-from routes import games, auth
+from routes import games, auth, uploadImage
 from starlette.middleware.cors import CORSMiddleware
 from core.config import ORIGIN
 
@@ -21,3 +21,4 @@ async def read_root():
 
 app.include_router(games.router, prefix="/games", tags=["Games"])
 app.include_router(auth.router, prefix='/auth', tags=['Auth'])
+app.include_router(uploadImage.router, prefix="/upload", tags=["Upload"])
